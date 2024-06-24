@@ -1,0 +1,5 @@
+name: openmm
+channels:
+  - conda-forge
+dependencies:
+  - openmm
