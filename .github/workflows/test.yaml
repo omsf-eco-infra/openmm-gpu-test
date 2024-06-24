@@ -36,7 +36,6 @@ jobs:
               - conda-forge
               - defaults
           environment-name: openmm
-          channels: conda-forge,defaults
       - name: Test for GPU
         id: gpu_test
         run: python -m openmm.testInstallation
