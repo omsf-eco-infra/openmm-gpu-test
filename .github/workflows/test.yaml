@@ -25,6 +25,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   openmm-test:
     runs-on: self-hosted
+    needs:
+      - start-aws-runner
     steps:
       - uses: mamba-org/setup-micromamba@main
         with:
