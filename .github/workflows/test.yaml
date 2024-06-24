@@ -28,6 +28,7 @@ jobs:
     needs:
       - start-aws-runner
     steps:
+      - uses: actions/checkout@v4
       - uses: mamba-org/setup-micromamba@main
         with:
           environment-file: environment.yml
