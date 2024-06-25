@@ -31,14 +31,15 @@ jobs:
       - uses: mamba-org/setup-micromamba@main
         with:
           environment-file: environment.yml
+          init-shell: bash
           condarc: |
             channels:
               - conda-forge
               - defaults
-          environment-name: openmm
       - name: Test for GPU
         id: gpu_test
         run: python -m openmm.testInstallation
+        shell: bash -el {0}
   stop-aws-runner:
     runs-on: ubuntu-latest
     needs:
