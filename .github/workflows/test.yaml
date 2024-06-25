@@ -2,7 +2,6 @@ name: Test OpenMM Runner
 on:
   workflow_dispatch:
 
-
 jobs:
   start-aws-runner:
     runs-on: ubuntu-latest
@@ -16,7 +15,7 @@ jobs:
           provider: "aws"
           action: "start"
           aws_image_id: ami-0e001c9271cf7f3b9
-          aws_instance_type: t2.micro
+          aws_instance_type: t3.large
           aws_region_name: us-east-1
           aws_home_dir: /home/ubuntu
         env:
@@ -58,7 +57,3 @@ jobs:
           GH_PAT: ${{ secrets.GH_PAT }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-
-
-
-
