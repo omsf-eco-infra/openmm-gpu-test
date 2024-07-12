@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Create cloud runner
         id: aws-start
-        uses: omsf-eco-infra/gha-runner@v0.1.1
+        uses: omsf-eco-infra/gha-runner@65bb42ed16b6440d06f24da8d75b549ab127b9a6
         with:
           provider: "aws"
           action: "start"
@@ -52,7 +52,7 @@ jobs:
     if: ${{ always() }}
     steps:
       - name: Stop instances
-        uses: omsf-eco-infra/gha-runner@v0.1.1
+        uses: omsf-eco-infra/gha-runner@65bb42ed16b6440d06f24da8d75b549ab127b9a6
         with:
           provider: "aws"
           action: "stop"
