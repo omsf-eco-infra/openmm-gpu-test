@@ -28,6 +28,10 @@ jobs:
       - start-aws-runner
     steps:
       - uses: actions/checkout@v4
+      - name: Print Docker details
+        run: docker version
+      - name: Check for nvidia-smi
+        run: nvidia-smi
       - uses: mamba-org/setup-micromamba@main
         with:
           environment-file: environment.yml
