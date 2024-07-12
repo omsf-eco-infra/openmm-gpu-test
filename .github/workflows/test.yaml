@@ -29,9 +29,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Print Docker details
-        run: docker version
+        run: "docker version || true"
       - name: Check for nvidia-smi
-        run: nvidia-smi
+        run: "nvidia-smi || true"
       - uses: mamba-org/setup-micromamba@main
         with:
           environment-file: environment.yml
