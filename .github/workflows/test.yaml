@@ -8,6 +8,12 @@ jobs:
     outputs:
       mapping: ${{ steps.aws-start.outputs.mapping }}
     steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1 
       - name: Create cloud runner
         id: aws-start
         uses: omsf-eco-infra/gha-runner@65bb42ed16b6440d06f24da8d75b549ab127b9a6
@@ -20,14 +26,14 @@ jobs:
           aws_home_dir: /home/ubuntu
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   openmm-test:
     runs-on: self-hosted
     needs:
       - start-aws-runner
     steps:
       - uses: actions/checkout@v4
+      - name: Print disk usage
+        run: "df -h"
       - name: Print Docker details
         run: "docker version || true"
       - name: Check for nvidia-smi
@@ -51,6 +57,12 @@ jobs:
       - openmm-test
     if: ${{ always() }}
     steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
       - name: Stop instances
         uses: omsf-eco-infra/gha-runner@65bb42ed16b6440d06f24da8d75b549ab127b9a6
         with:
@@ -60,5 +72,3 @@ jobs:
           aws_region_name: us-east-1
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
