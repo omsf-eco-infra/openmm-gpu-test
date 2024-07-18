@@ -21,7 +21,7 @@ jobs:
           provider: "aws"
           action: "start"
           aws_image_id: ${{ secrets.AWS_AMI }} 
-          aws_instance_type: p2.xlarge
+          aws_instance_type: g4dn.xlarge
           aws_region_name: us-east-1
           aws_home_dir: /home/ubuntu
         env:
