@@ -3,4 +3,3 @@ channels:
   - conda-forge
 dependencies:
   - openmm
-  - cudatoolkit=11.4
