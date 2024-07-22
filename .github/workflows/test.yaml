@@ -16,7 +16,7 @@ jobs:
           aws-region: us-east-1 
       - name: Create cloud runner
         id: aws-start
-        uses: omsf-eco-infra/gha-runner@65bb42ed16b6440d06f24da8d75b549ab127b9a6
+        uses: omsf-eco-infra/gha-runner@ea6f088535ca921754159ab0f6f9d483d263de67
         with:
           provider: "aws"
           action: "start"
@@ -64,7 +64,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - name: Stop instances
-        uses: omsf-eco-infra/gha-runner@65bb42ed16b6440d06f24da8d75b549ab127b9a6
+        uses: omsf-eco-infra/gha-runner@ea6f088535ca921754159ab0f6f9d483d263de67
         with:
           provider: "aws"
           action: "stop"
