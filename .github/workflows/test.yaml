@@ -4,6 +4,9 @@ on:
 
 jobs:
   start-aws-runner:
+    permissions:
+      id-token: write
+      contents: read
     runs-on: ubuntu-latest
     outputs:
       mapping: ${{ steps.aws-start.outputs.mapping }}
@@ -11,8 +14,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::730335439009:role/gha-runner-deploy
           aws-region: us-east-1 
       - name: Create cloud runner
         id: aws-start
@@ -52,6 +54,9 @@ jobs:
         shell: bash -el {0}
   stop-aws-runner:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     needs:
       - start-aws-runner
       - openmm-test
@@ -60,8 +65,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          role-to-assume: arn:aws:iam::730335439009:role/gha-runner-deploy
           aws-region: us-east-1
       - name: Stop instances
         uses: omsf-eco-infra/gha-runner@v0.2.0
