@@ -30,6 +30,9 @@ jobs:
           GH_PAT: ${{ secrets.GH_PAT }}
   openmm-test:
     runs-on: self-hosted
+    defaults:
+      run:
+        shell: bash -l {0}
     needs:
       - start-aws-runner
     steps:
@@ -43,7 +46,6 @@ jobs:
       - uses: mamba-org/setup-micromamba@main
         with:
           environment-file: environment.yml
-          init-shell: bash
           condarc: |
             channels:
               - conda-forge
@@ -51,7 +53,6 @@ jobs:
       - name: Test for GPU
         id: gpu_test
         run: python -m openmm.testInstallation
-        shell: bash -el {0}
   stop-aws-runner:
     runs-on: ubuntu-latest
     permissions:
