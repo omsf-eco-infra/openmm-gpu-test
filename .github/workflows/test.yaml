@@ -18,7 +18,7 @@ jobs:
           aws-region: us-east-1 
       - name: Create cloud runner
         id: aws-start
-        uses: omsf-eco-infra/gha-runner@6bef356226b155987ad2c677ecb5ab71d4722753
+        uses: omsf-eco-infra/gha-runner@57e6c6fc705cf47c26af1e41e8d8a408c528810b
         with:
           provider: "aws"
           action: "start"
@@ -68,7 +68,7 @@ jobs:
           role-to-assume: arn:aws:iam::730335439009:role/gha-runner-deploy
           aws-region: us-east-1
       - name: Stop instances
-        uses: omsf-eco-infra/gha-runner@6bef356226b155987ad2c677ecb5ab71d4722753
+        uses: omsf-eco-infra/gha-runner@57e6c6fc705cf47c26af1e41e8d8a408c528810b
         with:
           provider: "aws"
           action: "stop"
