@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       mapping: ${{ steps.aws-start.outputs.mapping }}
+      instances: ${{ steps.aws-start.outputs.instances }}
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -18,7 +19,7 @@ jobs:
           aws-region: us-east-1 
       - name: Create cloud runner
         id: aws-start
-        uses: omsf-eco-infra/gha-runner@main
+        uses: omsf-eco-infra/gha-runner@testing
         with:
           provider: "aws"
           action: "start"
@@ -29,7 +30,7 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
   openmm-test:
-    runs-on: self-hosted
+    runs-on: ${{ fromJSON(needs.start-aws-runner.outputs.instances) }}
     defaults:
       run:
         shell: bash -leo pipefail {0}
@@ -69,7 +70,7 @@ jobs:
           role-to-assume: arn:aws:iam::730335439009:role/gha-runner-deploy
           aws-region: us-east-1
       - name: Stop instances
-        uses: omsf-eco-infra/gha-runner@main
+        uses: omsf-eco-infra/gha-runner@testing
         with:
           provider: "aws"
           action: "stop"
