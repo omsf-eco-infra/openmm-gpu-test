@@ -30,7 +30,7 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
   openmm-test:
-    runs-on: ${{ fromJSON(needs.start-aws-runner.outputs.instances) }}
+    runs-on: ${{ needs.start-aws-runner.outputs.instances }}
     defaults:
       run:
         shell: bash -leo pipefail {0}
