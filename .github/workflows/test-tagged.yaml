@@ -50,7 +50,6 @@ jobs:
           condarc: |
             channels:
               - conda-forge
-              - defaults
       - name: Test for GPU
         id: gpu_test
         run: python -m openmm.testInstallation
