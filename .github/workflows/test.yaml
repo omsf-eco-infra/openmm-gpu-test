@@ -1,4 +1,4 @@
-name: Test OpenMM Runner
+name: Test OpenMM Runner - latest
 on:
   workflow_dispatch:
 
@@ -46,7 +46,8 @@ jobs:
         run: "nvidia-smi || true"
       - uses: mamba-org/setup-micromamba@main
         with:
-          environment-file: environment.yml
+          create-args: >-
+            openmm
           condarc: |
             channels:
               - conda-forge
