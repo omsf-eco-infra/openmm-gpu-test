@@ -46,6 +46,7 @@ jobs:
         run: "nvidia-smi || true"
       - uses: mamba-org/setup-micromamba@main
         with:
+          environment-name: openmm
           create-args: >-
             openmm
           condarc: |
