@@ -7,7 +7,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        instance_type: ["g4dn.xlarge", "t3"]
+        instance_type: ["g4dn.xlarge", "t3.large"]
     uses: ./.github/workflows/reusuable-test.yaml
     permissions:
       id-token: write
