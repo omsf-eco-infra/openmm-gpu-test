@@ -1,0 +1,14 @@
+name: Test reusuable workflow matrix
+on:
+  workflow_dispatch:
+
+jobs:
+  instance-matrix:
+    strategy:
+      fail-fast: false
+      matrix:
+        instance_type: ["g4dn.xlarge", "t3"]
+    uses: ./.github/workflows/reusable-test.yaml
+    with:
+      instance_type: ${{ matrix.instance_type }}
+    secrets: inherit # NOTE: We may not need this for use in the same repo
