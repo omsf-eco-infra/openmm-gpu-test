@@ -1,4 +1,4 @@
-name: Test OpenMM Runner
+name: Test OpenMM Runner - latest
 on:
   workflow_dispatch:
 
@@ -19,7 +19,7 @@ jobs:
           aws-region: us-east-1 
       - name: Create cloud runner
         id: aws-start
-        uses: omsf-eco-infra/gha-runner@latest
+        uses: omsf-eco-infra/gha-runner@main
         with:
           provider: "aws"
           action: "start"
@@ -46,7 +46,9 @@ jobs:
         run: "nvidia-smi || true"
       - uses: mamba-org/setup-micromamba@main
         with:
-          environment-file: environment.yml
+          environment-name: openmm
+          create-args: >-
+            openmm
           condarc: |
             channels:
               - conda-forge
@@ -69,7 +71,7 @@ jobs:
           role-to-assume: arn:aws:iam::730335439009:role/gha-runner-deploy
           aws-region: us-east-1
       - name: Stop instances
-        uses: omsf-eco-infra/gha-runner@latest
+        uses: omsf-eco-infra/gha-runner@main
         with:
           provider: "aws"
           action: "stop"
