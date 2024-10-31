@@ -9,6 +9,9 @@ jobs:
       matrix:
         instance_type: ["g4dn.xlarge", "t3"]
     uses: ./.github/workflows/reusuable-test.yaml
+    permissions:
+      id-token: write
+      contents: read
     with:
       instance_type: ${{ matrix.instance_type }}
     secrets: inherit # NOTE: We may not need this for use in the same repo
