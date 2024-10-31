@@ -8,7 +8,7 @@ jobs:
       fail-fast: false
       matrix:
         instance_type: ["g4dn.xlarge", "t3"]
-    uses: ./.github/workflows/reusable-test.yaml
+    uses: ./.github/workflows/reusuable-test.yaml
     with:
       instance_type: ${{ matrix.instance_type }}
     secrets: inherit # NOTE: We may not need this for use in the same repo
