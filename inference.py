@@ -84,6 +84,4 @@ def run_inference(batch_size=32, num_batches=10):
 if __name__ == "__main__":
     print("CUDA available:", torch.cuda.is_available())
     print("torch version:", torch.__version__)
-    if not torch.cuda.is_available():
-        raise Exception("CUDA not available")
     run_inference()
