@@ -5,6 +5,9 @@ on:
 jobs:
   start-aws-runner:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     outputs:
       mapping: ${{ steps.aws-start.outputs.mapping }}
       instances: ${{ steps.aws-start.outputs.instances }}
@@ -46,13 +49,16 @@ jobs:
           environment-file: environment.yml
       - name: Test for GPU
         id: gpu_test
-        run: python -m openmm.testInstallation
+        run: python inference.py
   stop-aws-runner:
     runs-on: ubuntu-latest
     needs:
       - start-aws-runner
       - inference-test
     if: ${{ always() }}
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
