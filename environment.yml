@@ -5,7 +5,6 @@ dependencies:
   - openmm
   - python=3.10
   - pytorch-gpu
-  - pytorch-cuda
   - transformers
   - pip
   - pip:
