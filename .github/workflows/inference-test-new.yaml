@@ -74,11 +74,14 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::730335439009:role/gha-runner-deploy
           aws-region: us-east-1
-      - name: Stop instances
-        uses: omsf-eco-infra/gha-runner@main
+      - name: Test Action
+        uses: actions/checkout@v4
         with:
-          provider: "aws"
-          action: "stop"
+          repository: "omsf-eco-infra/stop-aws-gha-runner"
+          path: "stop-aws-gha-runner"
+      - name: Stop instances
+        uses: ./stop-aws-gha-runner
+        with:
           aws_region_name: us-east-1
           instance_mapping: ${{ needs.start-aws-runner.outputs.mapping }}
         env:
