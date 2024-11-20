@@ -1,4 +1,4 @@
-name: Inference test (Start GHA Runner)
+name: Test refactor
 on:
   workflow_dispatch:
 
@@ -32,38 +32,10 @@ jobs:
           aws_home_dir: /home/ubuntu
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
-  inference-test:
-    runs-on: ${{ fromJSON(needs.start-aws-runner.outputs.instances) }}
-    defaults:
-      run:
-        shell: bash -leo pipefail {0}
-    needs:
-      - start-aws-runner
-    steps:
-      - name: Checkout scripts
-        uses: actions/checkout@v4
-        with:
-          sparse-checkout: |
-            inference-test
-          repository: omsf-eco-infra/ci-scripts
-          path: ci-scripts
-      - name: Print disk usage
-        run: "df -h"
-      - name: Print Docker details
-        run: "docker version || true"
-      - name: Check for nvidia-smi
-        run: "nvidia-smi || true"
-      - uses: mamba-org/setup-micromamba@main
-        with:
-          environment-file: ci-scripts/inference-test/environment.yml
-      - name: Test for GPU
-        id: gpu_test
-        run: python ci-scripts/inference-test/inference.py
   stop-aws-runner:
     runs-on: ubuntu-latest
     needs:
       - start-aws-runner
-      - inference-test
     if: ${{ always() }}
     permissions:
       id-token: write
