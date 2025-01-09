@@ -19,13 +19,14 @@ jobs:
           aws-region: us-east-1 
       - name: Create cloud runner
         id: aws-start
-        uses: omsf-eco-infra/gha-runner@main
+        uses: ethanholz/gha-runner@feat/storage
         with:
           provider: "aws"
           action: "start"
           aws_region_name: us-east-1
           aws_image_id: ami-0f7c4a792e3fb63c8 
           aws_instance_type: g4dn.xlarge
+          aws_root_device_size: 100
           aws_home_dir: /home/ubuntu
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
@@ -72,7 +73,7 @@ jobs:
           role-to-assume: arn:aws:iam::730335439009:role/gha-runner-deploy
           aws-region: us-east-1
       - name: Stop instances
-        uses: omsf-eco-infra/gha-runner@main
+        uses: ethanholz/gha-runner@feat/storage
         with:
           provider: "aws"
           action: "stop"
