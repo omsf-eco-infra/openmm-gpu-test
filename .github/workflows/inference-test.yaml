@@ -19,12 +19,13 @@ jobs:
           aws-region: us-east-1 
       - name: Create cloud runner
         id: aws-start
-        uses: omsf-eco-infra/gha-runner@main
+        uses: omsf-eco-infra/gha-runner@v0.4.0
         with:
           provider: "aws"
           action: "start"
           aws_region_name: us-east-1
           aws_image_id: ami-0f7c4a792e3fb63c8 
+          aws_root_device_size: 125
           aws_instance_type: g4dn.xlarge
           aws_home_dir: /home/ubuntu
         env:
@@ -53,6 +54,8 @@ jobs:
       - uses: mamba-org/setup-micromamba@main
         with:
           environment-file: ci-scripts/inference-test/environment.yml
+      - name: Test for pytorch
+        run: python -c "import torch; assert torch.cuda.is_available()"
       - name: Test for GPU
         id: gpu_test
         run: python ci-scripts/inference-test/inference.py
@@ -72,7 +75,7 @@ jobs:
           role-to-assume: arn:aws:iam::730335439009:role/gha-runner-deploy
           aws-region: us-east-1
       - name: Stop instances
-        uses: omsf-eco-infra/gha-runner@main
+        uses: omsf-eco-infra/gha-runner@v0.4.0
         with:
           provider: "aws"
           action: "stop"
