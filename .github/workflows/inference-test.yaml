@@ -72,7 +72,7 @@ jobs:
           role-to-assume: arn:aws:iam::730335439009:role/gha-runner-deploy
           aws-region: us-east-1
       - name: Stop instances
-        uses: omsf/start-aws-gha-runner@main
+        uses: omsf/stop-aws-gha-runner@main
         with:
           instance_mapping: ${{ needs.start-aws-runner.outputs.mapping }}
         env:
