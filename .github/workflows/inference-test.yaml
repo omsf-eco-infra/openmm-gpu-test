@@ -74,6 +74,6 @@ jobs:
       - name: Stop instances
         uses: omsf/start-aws-gha-runner@main
         with:
-          instance_mapping: ${{ neeDs.start-aws-runner.outputs.mapping }}
+          instance_mapping: ${{ needs.start-aws-runner.outputs.mapping }}
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
