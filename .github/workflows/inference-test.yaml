@@ -25,6 +25,8 @@ jobs:
           aws_root_device_size: 125
           aws_instance_type: g4dn.xlarge
           aws_home_dir: /home/ubuntu
+          aws_tags:
+            - gha-runner
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
   inference-test:
@@ -56,24 +58,3 @@ jobs:
       - name: Test for GPU
         id: gpu_test
         run: python ci-scripts/inference-test/inference.py
-  stop-aws-runner:
-    runs-on: ubuntu-latest
-    needs:
-      - start-aws-runner
-      - inference-test
-    if: ${{ always() }}
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: arn:aws:iam::730335439009:role/gha-runner-deploy
-          aws-region: us-east-1
-      - name: Stop instances
-        uses: omsf/stop-aws-gha-runner@main
-        with:
-          instance_mapping: ${{ needs.start-aws-runner.outputs.mapping }}
-        env:
-          GH_PAT: ${{ secrets.GH_PAT }}
