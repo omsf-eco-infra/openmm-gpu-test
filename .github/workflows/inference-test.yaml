@@ -25,7 +25,7 @@ jobs:
           aws_root_device_size: 125
           aws_instance_type: g4dn.xlarge
           aws_home_dir: /home/ubuntu
-          aws_tags: '{["gha-runner"]}'
+          aws_tags: '["gha-runner"]'
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
   inference-test:
