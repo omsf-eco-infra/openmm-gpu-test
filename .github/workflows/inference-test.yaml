@@ -19,9 +19,10 @@ jobs:
           aws-region: us-east-1 
       - name: Create cloud runner
         id: aws-start
-        uses: omsf/start-aws-gha-runner@main
+        uses: omsf/start-aws-gha-runner@feat/auto-updating-ami
         with:
-          aws_image_id: ami-0f7c4a792e3fb63c8 
+          aws_image_id: latest
+          aws_image_name: Deep Learning Base AMI with Single CUDA
           aws_root_device_size: 125
           aws_instance_type: g4dn.xlarge
           aws_home_dir: /home/ubuntu
