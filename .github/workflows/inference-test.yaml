@@ -58,6 +58,8 @@ jobs:
       - name: Test for GPU
         id: gpu_test
         run: python ci-scripts/inference-test/inference.py
+      - name: Fail
+        run: "exit 1"
   notify_failure:
     needs: [inference-test]
     runs-on: ubuntu-latest
