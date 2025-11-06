@@ -58,3 +58,13 @@ jobs:
       - name: Test for GPU
         id: gpu_test
         run: python ci-scripts/inference-test/inference.py
+  notify_failure:
+    needs: [inference-test]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    if: always() && (needs.inference-test.result == 'failure')
+    steps:
+      - name: Create issue
+        run: 'gh issue create --body "Job failed, please check AWS for running instances."'
