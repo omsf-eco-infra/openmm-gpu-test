@@ -22,7 +22,7 @@ jobs:
         uses: omsf/start-aws-gha-runner@feat/auto-updating-ami
         with:
           aws_image_id: latest
-          aws_image_name: Deep Learning Base AMI with Single CUDA
+          aws_image_name: Deep Learning Base AMI with Single CUDA (Ubuntu 22.04)
           aws_root_device_size: 125
           aws_instance_type: g4dn.xlarge
           aws_home_dir: /home/ubuntu
