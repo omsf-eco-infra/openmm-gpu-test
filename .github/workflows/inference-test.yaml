@@ -69,4 +69,6 @@ jobs:
     if: always() && (needs.inference-test.result == 'failure')
     steps:
       - name: Create issue
-        run: 'gh issue create --body "Job failed, please check AWS for running instances."'
+        run: 'gh issue create --title "AWS job failed to stop correctly" --body "Job failed, please check AWS for running instances."'
+        env:
+          GH_TOKEN: ${{ github.token }}
