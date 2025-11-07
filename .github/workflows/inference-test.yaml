@@ -37,6 +37,8 @@ jobs:
     needs:
       - start-aws-runner
     steps:
+      - name: Fail
+        run: "exit 1"
       - name: Checkout scripts
         uses: actions/checkout@v4
         with:
@@ -58,8 +60,6 @@ jobs:
       - name: Test for GPU
         id: gpu_test
         run: python ci-scripts/inference-test/inference.py
-      - name: Fail
-        run: "exit 1"
   notify_failure:
     needs: [inference-test]
     runs-on: ubuntu-latest
