@@ -19,7 +19,7 @@ jobs:
           brev_instance_type: g6e.xlarge
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
-          BREV_API_KEY: ${{ secrets.BREV_API_KEY }}
+          BREV_API_KEY: ${{ secrets.BREV_API_TOKEN }}
   inference-test:
     runs-on: ${{ fromJSON(needs.start-aws-runner.outputs.instances) }}
     defaults:
@@ -65,4 +65,4 @@ jobs:
           instance_mapping: ${{ needs.start-brev-runner.outputs.mapping }}
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
-          BREV_API_KEY: ${{ secrets.BREV_API_KEY }}
+          BREV_API_KEY: ${{ secrets.BREV_API_TOKEN }}
