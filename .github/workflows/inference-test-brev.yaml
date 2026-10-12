@@ -21,7 +21,7 @@ jobs:
           GH_PAT: ${{ secrets.GH_PAT }}
           BREV_API_KEY: ${{ secrets.BREV_API_TOKEN }}
   inference-test:
-    runs-on: ${{ fromJSON(needs.start-aws-runner.outputs.instances) }}
+    runs-on: ${{ fromJSON(needs.start-brev-runner.outputs.instances) }}
     defaults:
       run:
         shell: bash -leo pipefail {0}
